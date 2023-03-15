@@ -40,11 +40,11 @@ public class Application {
                 15
         );
 
-        catalog.setStoredItem1(book);
-        catalog.setStoredItem2(page);
-        catalog.setStoredItem3(document);
-        catalog.setStoredItem4(interview);
-        catalog.setStoredItem5(magazine);
+        catalog.addStoredItem(book);
+        catalog.addStoredItem(page);
+        catalog.addStoredItem(document);
+        catalog.addStoredItem(interview);
+        catalog.addStoredItem(magazine);
 
         String all = catalog.printAll();
 
