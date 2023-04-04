@@ -22,7 +22,6 @@ public class HerniPlan {
      */
     public HerniPlan() {
         zalozProstoryHry();
-
     }
     /**
      *  Vytváří jednotlivé prostory a propojuje je pomocí východů.

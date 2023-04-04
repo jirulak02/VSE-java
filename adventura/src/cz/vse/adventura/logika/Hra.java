@@ -37,6 +37,7 @@ public class Hra implements IHra {
                "Napište 'nápověda', pokud si nevíte rady, jak hrát dál.\n" +
                "\n" +
                herniPlan.getAktualniProstor().dlouhyPopis();
+
     }
     
     /**

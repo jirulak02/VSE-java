@@ -20,7 +20,6 @@ public class Prostor {
     private String nazev;
     private String popis;
     private Set<Prostor> vychody;   // obsahuje sousední místnosti
-
     private Map<String, Vec> veci = new HashMap<>();
     /**
      * Vytvoření prostoru se zadaným popisem, např. "kuchyň", "hala", "trávník
