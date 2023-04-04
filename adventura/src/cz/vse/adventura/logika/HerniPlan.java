@@ -47,12 +47,16 @@ public class HerniPlan {
         chaloupka.setVychod(hlubokyLes);
 
         // vytvářejí se jednotlivé věci
-        Vec postel = new Vec("postel", false);
-        Vec koste = new Vec("koště", true);
+        Vec postel = new Vec("postel", false, 2);
+        Vec koste = new Vec("koště", true, 3);
 
         // přiřazují se věci mezi prostory (sousedící prostory)
         domecek.addVec(postel);
         domecek.addVec(koste);
+
+        // vytvářejí se batoh
+        Batoh batoh = new Batoh(15);
+        batoh.addVec(koste);
                 
         aktualniProstor = domecek;  // hra začíná v domečku       
     }
