@@ -15,12 +15,14 @@ package cz.vse.adventura.logika;
 public class HerniPlan {
     
     private Prostor aktualniProstor;
+    private Batoh batoh;
     
      /**
      *  Konstruktor který vytváří jednotlivé prostory a propojuje je pomocí východů.
      *  Jako výchozí aktuální prostor nastaví halu.
      */
-    public HerniPlan() {
+    public HerniPlan(Batoh batoh) {
+        this.batoh = batoh;
         zalozProstoryHry();
     }
     /**
@@ -29,37 +31,65 @@ public class HerniPlan {
      */
     private void zalozProstoryHry() {
         // vytvářejí se jednotlivé prostory
-        Prostor domecek = new Prostor("domeček","domeček, ve kterém bydlí Karkulka");
-        Prostor chaloupka = new Prostor("chaloupka", "chaloupka, ve které bydlí babička Karkulky");
-        Prostor jeskyne = new Prostor("jeskyně","stará plesnivá jeskyně");
-        Prostor les = new Prostor("les","les s jahodami, malinami a pramenem vody");
-        Prostor hlubokyLes = new Prostor("hluboký_les","temný les, ve kterém lze potkat vlka");
+        Prostor temnaSin = new Prostor("temná_síň", "temná síň");
+        Prostor tichaMistnost = new Prostor("tichá_místnost", "tichá místnost", true);
+        Prostor zrcadlovaKomnata = new Prostor("zrcadlová_komnata", "zrcadlová komnata");
+        Prostor prazdnyPokoj = new Prostor("prázdný_pokoj", "prázdný pokoj");
+        Prostor cestaBezKonce = new Prostor("cesta_bez_konce", "cesta bez konce", true);
+        Prostor tajemnaLoznice = new Prostor("tajemná_ložnice", "tajemná ložnice");
+        Prostor krizovatkaTajemnstvi = new Prostor("križovatka_tajemství", "križovatka tajemství");
+        Prostor zelenaHala = new Prostor("zelená_hala", "zelená hala");
+        Prostor zpetnaMistnost = new Prostor("zpětná_místnost", "zpětná místnost");
+        Prostor prisernyTunel = new Prostor("příšerný_tunel", "příšerný tunel");
+        Prostor skrytaKoje = new Prostor("skrytá_kóje", "skrytá kóje", true);
+        Prostor ztracenyKout = new Prostor("ztracený_kout", "ztracený kout");
+        Prostor branaLabyrintu = new Prostor("brána_labyrintu", "brána labyrintu");
         
         // přiřazují se průchody mezi prostory (sousedící prostory)
-        domecek.setVychod(les);
-        les.setVychod(domecek);
-        les.setVychod(hlubokyLes);
-        hlubokyLes.setVychod(les);
-        hlubokyLes.setVychod(jeskyne);
-        hlubokyLes.setVychod(chaloupka);
-        jeskyne.setVychod(hlubokyLes);
-        chaloupka.setVychod(hlubokyLes);
+        temnaSin.setVychod(zrcadlovaKomnata);
+        tichaMistnost.setVychod(zrcadlovaKomnata);
+        zrcadlovaKomnata.setVychod(temnaSin);
+        zrcadlovaKomnata.setVychod(tichaMistnost);
+        zrcadlovaKomnata.setVychod(prazdnyPokoj);
+        zrcadlovaKomnata.setVychod(krizovatkaTajemnstvi);
+        prazdnyPokoj.setVychod(zrcadlovaKomnata);
+        prazdnyPokoj.setVychod(cestaBezKonce);
+        prazdnyPokoj.setVychod(zelenaHala);
+        cestaBezKonce.setVychod(prazdnyPokoj);
+        cestaBezKonce.setVychod(zpetnaMistnost);
+        tajemnaLoznice.setVychod(krizovatkaTajemnstvi);
+        tajemnaLoznice.setVychod(prisernyTunel);
+        krizovatkaTajemnstvi.setVychod(zrcadlovaKomnata);
+        krizovatkaTajemnstvi.setVychod(tajemnaLoznice);
+        krizovatkaTajemnstvi.setVychod(zelenaHala);
+        krizovatkaTajemnstvi.setVychod(skrytaKoje);
+        zelenaHala.setVychod(prazdnyPokoj);
+        zelenaHala.setVychod(krizovatkaTajemnstvi);
+        zelenaHala.setVychod(zpetnaMistnost);
+        zpetnaMistnost.setVychod(cestaBezKonce);
+        zpetnaMistnost.setVychod(zelenaHala);
+        zpetnaMistnost.setVychod(ztracenyKout);
+        prisernyTunel.setVychod(tajemnaLoznice);
+        prisernyTunel.setVychod(branaLabyrintu);
+        skrytaKoje.setVychod(krizovatkaTajemnstvi);
+        ztracenyKout.setVychod(zpetnaMistnost);
 
         // vytvářejí se jednotlivé věci
-        Vec postel = new Vec("postel", false, 2);
-        Vec koste = new Vec("koště", true, 3);
+        Vec mikrofon = new Vec("mikrofon", true, 1);
+        Vec spunt = new Vec("špunt", true, 1);
+        Vec bota = new Vec("bota", true, 1);
+        Vec klic = new Vec("klíč", true, 1);
 
         // přiřazují se věci mezi prostory (sousedící prostory)
-        domecek.addVec(postel);
-        domecek.addVec(koste);
+        zrcadlovaKomnata.addVec(mikrofon);
+        tajemnaLoznice.addVec(spunt);
+        zpetnaMistnost.addVec(bota);
+        ztracenyKout.addVec(klic);
 
-        // vytvářejí se batoh
-        Batoh batoh = new Batoh(15);
-        batoh.addVec(koste);
-                
-        aktualniProstor = domecek;  // hra začíná v domečku       
+        batoh.addVec(spunt);
+        aktualniProstor = temnaSin;  // hra začíná v Temné síni
     }
-    
+
     /**
      *  Metoda vrací odkaz na aktuální prostor, ve ktetém se hráč právě nachází.
      *

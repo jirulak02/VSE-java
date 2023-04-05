@@ -6,11 +6,12 @@ import java.util.Map;
 public class Batoh {
     private float objem;
 
-    private float zbyleMisto = objem;
+    private float zbyleMisto;
     private Map<String, Vec> veci = new HashMap<>();
 
     public Batoh(float objem) {
         this.objem = objem;
+        this.zbyleMisto = objem;
     }
 
     public float getObjem() {

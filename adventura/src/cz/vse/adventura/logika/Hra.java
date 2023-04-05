@@ -16,15 +16,16 @@ public class Hra implements IHra {
     private SeznamPrikazu platnePrikazy;    // obsahuje seznam přípustných příkazů
     private HerniPlan herniPlan;
     private boolean konecHry = false;
+    private Batoh batoh = new Batoh(4);
 
     /**
      *  Vytváří hru a inicializuje místnosti (prostřednictvím třídy HerniPlan) a seznam platných příkazů.
      */
     public Hra() {
-        herniPlan = new HerniPlan();
+        herniPlan = new HerniPlan(batoh);
         platnePrikazy = new SeznamPrikazu();
         platnePrikazy.vlozPrikaz(new PrikazNapoveda(platnePrikazy));
-        platnePrikazy.vlozPrikaz(new PrikazJdi(herniPlan));
+        platnePrikazy.vlozPrikaz(new PrikazJdi(herniPlan, this, batoh));
         platnePrikazy.vlozPrikaz(new PrikazKonec(this));
     }
 
@@ -44,7 +45,7 @@ public class Hra implements IHra {
      *  Vrátí závěrečnou zprávu pro hráče.
      */
     public String vratEpilog() {
-        return "Dík, že jste si zahráli.  Ahoj.";
+        return "Dík, že jste si zahráli. Ahoj.";
     }
     
     /** 
@@ -75,7 +76,7 @@ public class Hra implements IHra {
             textKVypsani = prikaz.provedPrikaz(parametry);
         }
         else {
-            textKVypsani="Nevím co tím myslíš? Tento příkaz neznám. ";
+            textKVypsani="Nevím co tím myslíte? Tento příkaz neznám. ";
         }
         return textKVypsani;
     }

@@ -21,6 +21,7 @@ public class Prostor {
     private String popis;
     private Set<Prostor> vychody;   // obsahuje sousední místnosti
     private Map<String, Vec> veci = new HashMap<>();
+    private boolean smrtelny = false;
     /**
      * Vytvoření prostoru se zadaným popisem, např. "kuchyň", "hala", "trávník
      * před domem"
@@ -33,6 +34,13 @@ public class Prostor {
         this.nazev = nazev;
         this.popis = popis;
         vychody = new HashSet<>();
+    }
+
+    public Prostor(String nazev, String popis, boolean smrtelny) {
+        this.nazev = nazev;
+        this.popis = popis;
+        vychody = new HashSet<>();
+        this.smrtelny = smrtelny;
     }
 
     /**
@@ -129,7 +137,7 @@ public class Prostor {
      * @return Dlouhý popis prostoru
      */
     public String dlouhyPopis() {
-        return "Jsi v mistnosti/prostoru " + popis + ".\n"
+        return "Jste v místnosti " + popis + ".\n"
                 + popisVychodu() + "\n"
                 + popisVeci();
     }
@@ -191,5 +199,13 @@ public class Prostor {
      */
     public Collection<Prostor> getVychody() {
         return Collections.unmodifiableCollection(vychody);
+    }
+
+    public boolean isSmrtelny() {
+        return smrtelny;
+    }
+
+    public void setSmrtelny(boolean smrtelny) {
+        this.smrtelny = smrtelny;
     }
 }
