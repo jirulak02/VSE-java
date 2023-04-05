@@ -1,27 +1,26 @@
 package cz.vse.adventura.logika;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
- * Trida Prostor - popisuje jednotlivé prostory (místnosti) hry
+ *  Trida Prostor - popisuje jednotlivé prostory (místnosti) hry
  *
- * Tato třída je součástí jednoduché textové hry.
+ *  "Prostor" reprezentuje jedno místo (místnost, prostor, ..) ve scénáři hry.
+ *  Prostor může mít sousední prostory připojené přes východy. Pro každý východ
+ *  si prostor ukládá odkaz na sousedící prostor.
  *
- * "Prostor" reprezentuje jedno místo (místnost, prostor, ..) ve scénáři hry.
- * Prostor může mít sousední prostory připojené přes východy. Pro každý východ
- * si prostor ukládá odkaz na sousedící prostor.
+ *  Tato třída je součástí jednoduché textové hry.
  *
- * @author Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova
- * @version pro školní rok 2016/2017
+ *@author       Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova, Jiří Šimeček
+ *@version      Duben 2023
  */
 public class Prostor {
-
     private String nazev;
     private String popis;
-    private Set<Prostor> vychody;   // obsahuje sousední místnosti
+    private Set<Prostor> vychody = new HashSet<>();   // obsahuje sousední místnosti
     private Map<String, Vec> veci = new HashMap<>();
     private boolean smrtelny = false;
+
     /**
      * Vytvoření prostoru se zadaným popisem, např. "kuchyň", "hala", "trávník
      * před domem"
@@ -33,13 +32,11 @@ public class Prostor {
     public Prostor(String nazev, String popis) {
         this.nazev = nazev;
         this.popis = popis;
-        vychody = new HashSet<>();
     }
 
     public Prostor(String nazev, String popis, boolean smrtelny) {
         this.nazev = nazev;
         this.popis = popis;
-        vychody = new HashSet<>();
         this.smrtelny = smrtelny;
     }
 
@@ -82,25 +79,26 @@ public class Prostor {
      *
      * @param o object, který se má porovnávat s aktuálním
      * @return hodnotu true, pokud má zadaný prostor stejný název, jinak false
-     */  
-      @Override
+     */
+    @Override
     public boolean equals(Object o) {
         // porovnáváme zda se nejedná o dva odkazy na stejnou instanci
         if (this == o) {
             return true;
         }
+
         // porovnáváme jakého typu je parametr 
         if (!(o instanceof Prostor)) {
             return false;    // pokud parametr není typu Prostor, vrátíme false
         }
+
         // přetypujeme parametr na typ Prostor 
         Prostor druhy = (Prostor) o;
 
-        //metoda equals třídy java.util.Objects porovná hodnoty obou názvů. 
-        //Vrátí true pro stejné názvy a i v případě, že jsou oba názvy null,
-        //jinak vrátí false.
-
-       return (java.util.Objects.equals(this.nazev, druhy.nazev));       
+        // metoda equals třídy java.util.Objects porovná hodnoty obou názvů.
+        // Vrátí true pro stejné názvy a i v případě, že jsou oba názvy null,
+        // jinak vrátí false.
+        return (java.util.Objects.equals(this.nazev, druhy.nazev));
     }
 
     /**
@@ -117,7 +115,6 @@ public class Prostor {
         vysledek = 37 * vysledek + hashNazvu;
         return vysledek;
     }
-      
 
     /**
      * Vrací název prostoru (byl zadán při vytváření prostoru jako parametr
@@ -142,8 +139,6 @@ public class Prostor {
                 + popisVeci();
     }
 
-
-
     /**
      * Vrací textový řetězec, který popisuje sousední východy, například:
      * "vychody: hala ".
@@ -152,17 +147,21 @@ public class Prostor {
      */
     private String popisVychodu() {
         String vracenyText = "východy:";
+
         for (Prostor sousedni : vychody) {
             vracenyText += " " + sousedni.getNazev();
         }
+
         return vracenyText;
     }
 
     private String popisVeci() {
         String vracenyText = "věci:";
-        for (String nazevVeci: veci.keySet()) {
+
+        for (String nazevVeci : veci.keySet()) {
             vracenyText += " " + nazevVeci;
         }
+
         return vracenyText;
     }
 
@@ -176,16 +175,28 @@ public class Prostor {
      * null, pokud prostor zadaného jména není sousedem.
      */
     public Prostor vratSousedniProstor(String nazevSouseda) {
-        List<Prostor>hledaneProstory = 
+        List<Prostor> hledaneProstory =
             vychody.stream()
                    .filter(sousedni -> sousedni.getNazev().equals(nazevSouseda))
-                   .collect(Collectors.toList());
-        if(hledaneProstory.isEmpty()){
+                   .collect(java.util.stream.Collectors.toList());
+
+        if (hledaneProstory.isEmpty()) {
             return null;
-        }
-        else {
+        } else {
             return hledaneProstory.get(0);
         }
+    }
+
+    public Set<Prostor> vratSmrtelneProstory() {
+        Set<Prostor> hledaneProstory = new HashSet<>();
+
+        for (Prostor vychod : vychody) {
+            if (vychod.isSmrtelny()) {
+                hledaneProstory.add(vychod);
+            }
+        }
+
+        return hledaneProstory;
     }
 
     /**

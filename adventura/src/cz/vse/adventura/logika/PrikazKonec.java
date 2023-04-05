@@ -2,17 +2,16 @@ package cz.vse.adventura.logika;
 
 /**
  *  Třída PrikazKonec implementuje pro hru příkaz konec.
+ *
+ *  Příkaz, který ukončí hru.
+ *
  *  Tato třída je součástí jednoduché textové hry.
  *  
  *@author     Jarmila Pavlickova
  *@version    pro školní rok 2016/2017
- *  
  */
-
 class PrikazKonec implements IPrikaz {
-
     private static final String NAZEV = "konec";
-
     private Hra hra;
 
     /**
@@ -30,13 +29,11 @@ class PrikazKonec implements IPrikaz {
      * 
      * @return zpráva, kterou vypíše hra hráči
      */
-
     @Override
     public String provedPrikaz(String... parametry) {
         if (parametry.length > 0) {
             return "Ukončit co? Nechápu, proč jste zadal druhé slovo.";
-        }
-        else {
+        } else {
             hra.setKonecHry(true);
             return "Hra ukončena příkazem konec!";
         }

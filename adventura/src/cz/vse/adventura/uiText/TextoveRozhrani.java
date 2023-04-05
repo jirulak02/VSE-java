@@ -1,23 +1,20 @@
 package cz.vse.adventura.uiText;
 
-
 import java.util.Scanner;
-
 import cz.vse.adventura.logika.IHra;
 
 /**
- *  Class TextoveRozhrani
+ *  Třída TextoveRozhrani
  * 
  *  Toto je uživatelského rozhraní aplikace Adventura
  *  Tato třída vytváří instanci třídy Hra, která představuje logiku aplikace.
  *  Čte vstup zadaný uživatelem a předává tento řetězec logice a vypisuje odpověď logiky na konzoli.
- *  
- *  
+ *
+ *  Tato třída je součástí jednoduché textové hry.
  *
  *@author     Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova
  *@version    pro školní rok 2016/2017
  */
-
 public class TextoveRozhrani {
     private IHra hra;
 
@@ -38,7 +35,6 @@ public class TextoveRozhrani {
 
         // základní cyklus programu - opakovaně se čtou příkazy a poté
         // se provádějí do konce hry.
-
         while (!hra.konecHry()) {
             String radek = prectiString();
             System.out.println(hra.zpracujPrikaz(radek));
@@ -54,8 +50,8 @@ public class TextoveRozhrani {
      */
     private String prectiString() {
         Scanner scanner = new Scanner(System.in);
+
         System.out.print("> ");
         return scanner.nextLine();
     }
-
 }

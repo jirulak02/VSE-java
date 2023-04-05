@@ -2,18 +2,15 @@
  * Kontrola kódování: Příliš žluťoučký kůň úpěl ďábelské ódy. */
 package cz.vse.adventura.logika;
 
-
-
-
-
 /**
  *  Rozhraní které musí implementovat hra, je na ně navázáno uživatelské rozhraní
+ *
+ *  Toto rozhraní je součástí jednoduché textové hry.
  *
  *@author     Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova
  *@version    pro školní rok 2016/2017
  */
-public interface IHra
-{
+public interface IHra {
     //== VEŘEJNÉ KONSTANTY =====================================================
     //== DEKLAROVANÉ METODY ====================================================
     /**
@@ -36,8 +33,8 @@ public interface IHra
      * @return   vrací true, pokud hra skončila
      */
      public boolean konecHry();
-     
-      /**
+
+    /**
      *  Metoda zpracuje řetězec uvedený jako parametr, rozdělí ho na slovo příkazu a další parametry.
      *  Pak otestuje zda příkaz je klíčovým slovem  např. jdi.
      *  Pokud ano spustí samotné provádění příkazu.
@@ -45,10 +42,9 @@ public interface IHra
      *@param  radek  text, který zadal uživatel jako příkaz do hry.
      *@return          vrací se řetězec, který se má vypsat na obrazovku
      */
-     public String zpracujPrikaz(String radek);
-   
-    
-     /**
+    public String zpracujPrikaz(String radek);
+
+    /**
      *  Metoda vrátí odkaz na herní plán, je využita hlavně v testech,
      *  kde se jejím prostřednictvím získává aktualní místnost hry.
      *  

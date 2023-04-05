@@ -2,10 +2,13 @@ package cz.vse.adventura.logika;
 
 /**
  *  Třída PrikazJdi implementuje pro hru příkaz jdi.
+ *
+ *  Příkaz umožňující pohyb z jedné místnosti do druhé.
+ *
  *  Tato třída je součástí jednoduché textové hry.
  *  
- *@author     Jarmila Pavlickova, Luboš Pavlíček
- *@version    pro školní rok 2016/2017
+ *@author     Jarmila Pavlickova, Luboš Pavlíček, Jiří Šimeček
+ *@version    Duben 2023
  */
 class PrikazJdi implements IPrikaz {
     private static final String NAZEV = "jdi";
@@ -21,6 +24,7 @@ class PrikazJdi implements IPrikaz {
     public PrikazJdi(HerniPlan plan) {
         this.plan = plan;
     }
+
     public PrikazJdi(HerniPlan plan, Hra hra, Batoh batoh) {
         this.plan = plan;
         this.hra = hra;
@@ -69,9 +73,10 @@ class PrikazJdi implements IPrikaz {
 
             for (String line : easterEgg) {
                 System.out.println(line);
+
                 try {
                     Thread.sleep(500);
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     System.out.println("Error message: " + e.getMessage());
                 }
             }
@@ -97,5 +102,4 @@ class PrikazJdi implements IPrikaz {
     public String getNazev() {
         return NAZEV;
     }
-
 }

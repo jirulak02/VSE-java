@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *  Class SeznamPrikazu - eviduje seznam přípustných příkazů adventury.
+ *  Třída SeznamPrikazu - eviduje seznam přípustných příkazů adventury.
+ *
  *  Používá se pro rozpoznávání příkazů
  *  a vrácení odkazu na třídu implementující konkrétní příkaz.
  *  Každý nový příkaz (instance implementující rozhraní Prikaz) se
@@ -17,25 +18,22 @@ import java.util.Map;
  */
 class SeznamPrikazu {
     // mapa pro uložení přípustných příkazů
-    private  Map<String,IPrikaz> mapaSPrikazy;
-    
-   
-    
+    private  Map<String, IPrikaz> mapaSPrikazy;
+
     /**
      * Konstruktor
      */
     public SeznamPrikazu() {
         mapaSPrikazy = new HashMap<>();
     }
-    
-    
+
     /**
      * Vkládá nový příkaz.
      *
      *@param  prikaz  Instance třídy implementující rozhraní IPrikaz
      */
     public void vlozPrikaz(IPrikaz prikaz) {
-        mapaSPrikazy.put(prikaz.getNazev(),prikaz);
+        mapaSPrikazy.put(prikaz.getNazev(), prikaz);
     }
     
     /**
@@ -48,8 +46,7 @@ class SeznamPrikazu {
     public IPrikaz vratPrikaz(String retezec) {
         if (mapaSPrikazy.containsKey(retezec)) {
             return mapaSPrikazy.get(retezec);
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -72,11 +69,11 @@ class SeznamPrikazu {
      */
     public String vratNazvyPrikazu() {
         String seznam = "";
+
         for (String slovoPrikazu : mapaSPrikazy.keySet()){
             seznam += slovoPrikazu + " ";
         }
+
         return seznam;
     }
-    
 }
-

@@ -1,26 +1,26 @@
 package cz.vse.adventura.logika;
 
 /**
- *  Třída PrikazNapoveda implementuje pro hru příkaz napoveda.
+ *  Třída PrikazNapoveda implementuje pro hru příkaz nápověda.
+ *
+ *  Příkaz, který hráči vysvětlý co má dělat a jaké může použít příkazy.
+ *
  *  Tato třída je součástí jednoduché textové hry.
  *  
- *@author     Jarmila Pavlickova, Luboš Pavlíček
- *@version    pro školní rok 2016/2017
- *  
+ *@author     Jarmila Pavlickova, Luboš Pavlíček, Jiří Šimeček
+ *@version    Duben 2023
  */
 class PrikazNapoveda implements IPrikaz {
-    
     private static final String NAZEV = "nápověda";
     private SeznamPrikazu platnePrikazy;
-    
-    
-     /**
-    *  Konstruktor třídy
-    *  
-    *  @param platnePrikazy seznam příkazů,
-    *                       které je možné ve hře použít,
-    *                       aby je nápověda mohla zobrazit uživateli. 
-    */    
+
+    /**
+     *  Konstruktor třídy
+     *
+     *  @param platnePrikazy seznam příkazů,
+     *                       které je možné ve hře použít,
+     *                       aby je nápověda mohla zobrazit uživateli.
+     */
     public PrikazNapoveda(SeznamPrikazu platnePrikazy) {
         this.platnePrikazy = platnePrikazy;
     }
@@ -33,21 +33,20 @@ class PrikazNapoveda implements IPrikaz {
      */
     @Override
     public String provedPrikaz(String... parametry) {
-        return "Tvým úkolem je dovést Červenou Karkulku z domečku\n"
-        + "až k babičce, která bydlí v chaloupce za lesem.\n"
+        return "Tvým úkolem je najít klíč, odemknout si bránu a utéct z labyrintu.\n"
         + "\n"
         + "Můžeš zadat tyto příkazy:\n"
-        + platnePrikazy.vratNazvyPrikazu();
+        + platnePrikazy.vratNazvyPrikazu()
+        + "\n(Příkaz 'jsem_mimino' vám ukáže které místnosti vás při vstupu zabijou.)";
     }
     
-     /**
+    /**
      *  Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
      *  
      *  @ return nazev prikazu
      */
     @Override
-      public String getNazev() {
+    public String getNazev() {
         return NAZEV;
      }
-
 }

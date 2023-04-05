@@ -2,14 +2,13 @@ package cz.vse.adventura.logika;
 
 /**
  *  Třída implementující toto rozhraní bude ve hře zpracovávat jeden konkrétní příkaz.
+ *
  *  Toto rozhraní je součástí jednoduché textové hry.
  *  
  *@author     Jarmila Pavlickova
  *@version    pro školní rok 2016/2017
- *  
  */
 interface IPrikaz {
-	
 	/**
      *  Metoda pro provedení příkazu ve hře.
      *  Počet parametrů je závislý na konkrétním příkazu,
@@ -18,7 +17,6 @@ interface IPrikaz {
      *  příkaz pouzij může mít dva parametry.
      *  
      *  @param parametry počet parametrů závisí na konkrétním příkazu.
-     *  
      */
     public String provedPrikaz(String... parametry);
     
@@ -28,5 +26,4 @@ interface IPrikaz {
      *  @return nazev prikazu
      */
 	public String getNazev();
-	
 }

@@ -3,9 +3,19 @@ package cz.vse.adventura.logika;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *  Třída Batoh - popisuje batoh, který slouží k přenosu věcí.
+ *
+ *  "Batoh" reprezentuje úložný prostor, který si uživatel nosí sebou.
+ *  Batoh má objem, volné objem a přidané věci.
+ *
+ *  Tato třída je součástí jednoduché textové hry.
+ *
+ *@author     Jiří Šimeček
+ *@version    Duben 2023
+ */
 public class Batoh {
     private float objem;
-
     private float zbyleMisto;
     private Map<String, Vec> veci = new HashMap<>();
 

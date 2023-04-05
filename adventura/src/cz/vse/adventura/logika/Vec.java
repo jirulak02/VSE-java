@@ -1,10 +1,20 @@
 package cz.vse.adventura.logika;
 
+/**
+ *  Třída Vec - popisuje jednotlivé věci
+ *
+ *  "Věc" reprezentuje jednotlivý objekt pohozený po místnostech.
+ *  Věc má název, objem a může či nemusí být přenositelná.
+ *
+ *  Tato třída je součástí jednoduché textové hry.
+ *
+ *@author     Jiří Šimeček
+ *@version    Duben 2023
+ */
 public class Vec {
     private String nazev;
     private boolean prenositelna;
     private float objem;
-
 
     public Vec(String nazev, boolean prenositelna, float objem) {
         this.nazev = nazev;
