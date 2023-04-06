@@ -15,24 +15,29 @@ class PrikazNapoveda implements IPrikaz {
     private SeznamPrikazu platnePrikazy;
 
     /**
-     *  Konstruktor třídy
+     *  Konstruktor příkazu nápověda.
      *
-     *  @param platnePrikazy seznam příkazů,
-     *                       které je možné ve hře použít,
-     *                       aby je nápověda mohla zobrazit uživateli.
+     *@param    platnePrikazy seznam příkazů, které je možné ve hře použít,
+     *                        aby je nápověda mohla zobrazit uživateli
      */
     public PrikazNapoveda(SeznamPrikazu platnePrikazy) {
         this.platnePrikazy = platnePrikazy;
     }
     
     /**
-     *  Vrací základní nápovědu po zadání příkazu "napoveda". Nyní se vypisuje
-     *  vcelku primitivní zpráva a seznam dostupných příkazů.
-     *  
-     *  @return napoveda ke hre
+     *  Vrací základní nápovědu po zadání příkazu "nápověda".
+     *  Nyní se vypisuje vcelku primitivní zpráva a seznam dostupných příkazů.
+     *
+     *@param    parametry obsahuje název příkazu nápověda
+     *@return   napoveda ke hre
      */
     @Override
     public String provedPrikaz(String... parametry) {
+        // chceme délku parametru 0, název příkazu byl odstraněn
+        if (parametry.length > 0) {
+            return "Jaká nápověda? Nechápu, proč jste zadali druhé slovo.";
+        }
+
         return "Tvým úkolem je najít klíč, odemknout si bránu a utéct z labyrintu.\n"
         + "\n"
         + "Můžeš zadat tyto příkazy:\n"
@@ -41,9 +46,9 @@ class PrikazNapoveda implements IPrikaz {
     }
     
     /**
-     *  Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
+     *  Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání).
      *  
-     *  @ return nazev prikazu
+     *@return   nazev prikazu
      */
     @Override
     public String getNazev() {

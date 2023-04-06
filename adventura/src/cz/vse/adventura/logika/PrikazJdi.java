@@ -17,14 +17,19 @@ class PrikazJdi implements IPrikaz {
     private Batoh batoh;
     
     /**
-    *  Konstruktor třídy
-    *  
-    *  @param plan herní plán, ve kterém se bude ve hře "chodit" 
-    */
+     *  Konstruktor příkazu jdi.
+     *
+     *@param    plan herní plán, ve kterém se bude ve hře "chodit"
+     */
     public PrikazJdi(HerniPlan plan) {
         this.plan = plan;
     }
 
+    /**
+     *  Konstruktor příkazu jdi.
+     *
+     *@param    plan herní plán, hra a batoh (pro kontrolování easter eggu)
+     */
     public PrikazJdi(HerniPlan plan, Hra hra, Batoh batoh) {
         this.plan = plan;
         this.hra = hra;
@@ -35,16 +40,19 @@ class PrikazJdi implements IPrikaz {
      *  Provádí příkaz "jdi". Zkouší se vyjít do zadaného prostoru. Pokud prostor
      *  existuje, vstoupí se do nového prostoru. Pokud zadaný sousední prostor
      *  (východ) není, vypíše se chybové hlášení.
+     *  Zařizuje i easter egg a zabíjení ve smrtelných místnostech.
      *
-     *@param parametry - jako  parametr obsahuje jméno prostoru (východu),
-     *                         do kterého se má jít.
-     *@return zpráva, kterou vypíše hra hráči
+     *@param    parametry parametr obsahuje jméno prostoru (východu),
+     *                    do kterého se má jít
+     *@return   zpráva, kterou vypíše hra hráči
      */ 
     @Override
     public String provedPrikaz(String... parametry) {
+        // chceme délku parametru 1, název příkazu byl odstraněn
         if (parametry.length == 0) {
-            // pokud chybí druhé slovo (sousední prostor), tak ....
-            return "Kam mám jít? Musíte zadat jméno východu";
+            return "Kam mám jít? Musíte zadat jméno východu.";
+        } else if (parametry.length > 1) {
+            return "Nelze jít do více místností zároveň, zadejte pouze jednu.";
         }
 
         String smer = parametry[0];
@@ -94,9 +102,9 @@ class PrikazJdi implements IPrikaz {
     }
     
     /**
-     *  Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
+     *  Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání).
      *  
-     *  @ return nazev prikazu
+     *@return   nazev prikazu
      */
     @Override
     public String getNazev() {

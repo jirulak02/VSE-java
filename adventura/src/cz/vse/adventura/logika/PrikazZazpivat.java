@@ -18,41 +18,58 @@ public class PrikazZazpivat implements IPrikaz {
     private static final String NAZEV = "zazpívat";
     private Batoh batoh;
 
+    /**
+     *  Konstruktor příkazu zazpívat.
+     *
+     *@param    batoh pro kontrolu přítomnosti mikrofonu
+     */
     public PrikazZazpivat(Batoh batoh) {
         this.batoh = batoh;
     }
 
+    /**
+     *  Spouští písničku ze složky a uspí provádění příkazů na 19 sekund.
+     */
     public void zazpivej() {
         try {
             System.out.println("Zapněte si zvuk.\n");
 
-            // Open an audio input stream.
+            // Otevírá audio stream
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
                     PrikazZazpivat.class.getResourceAsStream("../audio/Pisnicka.wav"));
 
-            // Get a clip resource.
             Clip clip = AudioSystem.getClip();
-
-            // Open audio clip and load samples from the audio input stream.
+            // Otevírá audio klip a vloží do něj vytvořený audio stream
             clip.open(audioInputStream);
 
-            // Start playing the sound clip.
+            // Spouští audio klip
             clip.start();
-
-            // Wait for the sound clip to finish playing.
             Thread.sleep(19000);
         } catch (Exception e) {
             System.out.println("Error message: " + e.getMessage());
         }
     }
 
+    /**
+     *  Zkontroluje přítomnost mikrofonu v batohu.
+     *  Volá funkci, která spouští zvuk písničky.
+     *  Vypisuje lyrics písničky řádek po řádku každých 3,4 vteřiny.
+     *
+     *@param    parametry obsahuje název příkazu zazpívat
+     *@return   lyrics přehrávané písničky
+     */
     @Override
     public String provedPrikaz(String... parametry) {
+        // chceme délku parametru 0, název příkazu byl odstraněn
+        if (parametry.length > 0) {
+            return "Písnička je již vybraná, takže stačí pouze příkaz zazpívat";
+        }
+
         if (!batoh.hasVec("mikrofon")) {
             return "Ke zpěvu potřebujete mikrofon.";
         }
 
-        String[] rickRoll = {
+        String[] pisnicka = {
                 "We’re no strangers to love",
                 "You know the rules and so do I",
                 "A full commitment’s what I’m thinking of",
@@ -69,7 +86,7 @@ public class PrikazZazpivat implements IPrikaz {
 
         zazpivej();
 
-        for (String line : rickRoll) {
+        for (String line : pisnicka) {
             System.out.println(line);
 
             try {
@@ -82,6 +99,11 @@ public class PrikazZazpivat implements IPrikaz {
         return "\nDík, že jste si se mnou zazpívali.";
     }
 
+    /**
+     *  Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání).
+     *
+     *@return   nazev prikazu
+     */
     @Override
     public String getNazev() {
         return NAZEV;

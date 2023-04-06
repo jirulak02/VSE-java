@@ -14,12 +14,14 @@ package cz.vse.adventura.logika;
  *@version    Duben 2023
  */
 public class Hra implements IHra {
-    private SeznamPrikazu platnePrikazy;    // obsahuje seznam přípustných příkazů
+    private SeznamPrikazu platnePrikazy;
     private HerniPlan herniPlan;
     private boolean konecHry = false;
     private Batoh batoh = new Batoh(4);
 
     /**
+     *  Konstruktor hry.
+     *
      *  Vytváří hru a inicializuje místnosti (prostřednictvím třídy HerniPlan) a seznam platných příkazů.
      */
     public Hra() {
@@ -34,6 +36,8 @@ public class Hra implements IHra {
 
     /**
      *  Vrátí úvodní zprávu pro hráče.
+     *
+     *@return   String uvítací zpráva pro uživatele, sousední místnosti a věci v místnosti
      */
     public String vratUvitani() {
         return "Vítejte!\n" +
@@ -44,7 +48,9 @@ public class Hra implements IHra {
     }
     
     /**
-     *  Vrátí závěrečnou zprávu pro hráče.
+     *  Vrátí závěrečnou zprávu po ukončení hry.
+     *
+     *@return   String závěrečná zpráva pro hráče
      */
     public String vratEpilog() {
         return "Dík, že jste si zahráli. Ahoj.";
@@ -52,6 +58,8 @@ public class Hra implements IHra {
     
     /** 
      * Vrací true, pokud hra skončila.
+     *
+     *@return   boolean zda hra snočila či ne
      */
     public boolean konecHry() {
         return konecHry;
@@ -62,8 +70,8 @@ public class Hra implements IHra {
      *  Pak otestuje zda příkaz je klíčovým slovem  např. jdi.
      *  Pokud ano spustí samotné provádění příkazu.
      *
-     *@param  radek  text, který zadal uživatel jako příkaz do hry.
-     *@return          vrací se řetězec, který se má vypsat na obrazovku
+     *@param    radek text, který zadal uživatel jako příkaz do hry
+     *@return   String, který se má vypsat na obrazovku
      */
     public String zpracujPrikaz(String radek) {
         String[] slova = radek.split("[ \t]+");
@@ -90,9 +98,9 @@ public class Hra implements IHra {
      *  Nastaví, že je konec hry, metodu využívá třída PrikazKonec,
      *  mohou ji použít i další implementace rozhraní Prikaz.
      *  
-     *  @param  konecHry  hodnota false= konec hry, true = hra pokračuje
+     *@param    konecHry hodnota false = konec hry, true = hra pokračuje
      */
-    void setKonecHry(boolean konecHry) {
+    public void setKonecHry(boolean konecHry) {
         this.konecHry = konecHry;
     }
     
@@ -100,7 +108,7 @@ public class Hra implements IHra {
      *  Metoda vrátí odkaz na herní plán, je využita hlavně v testech,
      *  kde se jejím prostřednictvím získává aktualní místnost hry.
      *  
-     *  @return     odkaz na herní plán
+     *@return   odkaz na herní plán
      */
     public HerniPlan getHerniPlan(){
         return herniPlan;

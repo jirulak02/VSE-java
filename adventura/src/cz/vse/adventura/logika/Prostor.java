@@ -3,7 +3,7 @@ package cz.vse.adventura.logika;
 import java.util.*;
 
 /**
- *  Trida Prostor - popisuje jednotlivé prostory (místnosti) hry
+ *  Trida Prostor - popisuje jednotlivé prostory (místnosti) hry.
  *
  *  "Prostor" reprezentuje jedno místo (místnost, prostor, ..) ve scénáři hry.
  *  Prostor může mít sousední prostory připojené přes východy. Pro každý východ
@@ -17,23 +17,28 @@ import java.util.*;
 public class Prostor {
     private String nazev;
     private String popis;
-    private Set<Prostor> vychody = new HashSet<>();   // obsahuje sousední místnosti
+    private Set<Prostor> vychody = new HashSet<>();
     private Map<String, Vec> veci = new HashMap<>();
     private boolean smrtelny = false;
 
     /**
-     * Vytvoření prostoru se zadaným popisem, např. "kuchyň", "hala", "trávník
-     * před domem"
+     *  Konstruktor prostoru.
      *
-     * @param nazev nazev prostoru, jednoznačný identifikátor, jedno slovo nebo
-     * víceslovný název bez mezer.
-     * @param popis Popis prostoru.
+     *@param    nazev název prostoru, jednoznačný identifikátor bez mezer
+     *@param    popis krátký popis prostoru
      */
     public Prostor(String nazev, String popis) {
         this.nazev = nazev;
         this.popis = popis;
     }
 
+    /**
+     *  Konstruktor třídy Prostor.
+     *
+     *@param    nazev název prostoru, jednoznačný identifikátor bez mezer
+     *@param    popis krátký popis prostoru
+     *@param    smrtelny určení, zda je místnost pro uživatele smrtelná
+     */
     public Prostor(String nazev, String popis, boolean smrtelny) {
         this.nazev = nazev;
         this.popis = popis;
@@ -41,44 +46,64 @@ public class Prostor {
     }
 
     /**
-     * Definuje východ z prostoru (sousední/vedlejsi prostor). Vzhledem k tomu,
-     * že je použit Set pro uložení východů, může být sousední prostor uveden
-     * pouze jednou (tj. nelze mít dvoje dveře do stejné sousední místnosti).
-     * Druhé zadání stejného prostoru tiše přepíše předchozí zadání (neobjeví se
-     * žádné chybové hlášení). Lze zadat též cestu ze do sebe sama.
+     *  Definuje východ z prostoru (sousední/vedlejsi prostor). Vzhledem k tomu,
+     *  že je použit Set pro uložení východů, může být sousední prostor uveden
+     *  pouze jednou (tj. nelze mít dvoje dveře do stejné sousední místnosti).
+     *  Druhé zadání stejného prostoru tiše přepíše předchozí zadání (neobjeví se
+     *  žádné chybové hlášení). Lze zadat též cestu ze do sebe sama.
      *
-     * @param vedlejsi prostor, který sousedi s aktualnim prostorem.
-     *
+     *@param    vedlejsi prostor, který sousedi s aktualnim prostorem
      */
     public void setVychod(Prostor vedlejsi) {
         vychody.add(vedlejsi);
     }
 
+    /**
+     *  Přidává věc do mapy věcí.
+     *
+     *@param    vec věc, kterou chceme přidat
+     */
     public void addVec(Vec vec) {
         veci.put(vec.getNazev(), vec);
     }
 
+    /**
+     *  Odstraní věc z mapy věcí prostoru.
+     *
+     *@param    nazev název věci k odstranění z prostoru
+     */
     public void removeVec(String nazev) {
         veci.remove(nazev);
     }
 
+    /**
+     *  Zjišťuje zda se věc vyskytuje v tomto prostoru.
+     *
+     *@param    nazev název věci kterou hledáme
+     */
     public boolean hasVec(String nazev) {
         return veci.containsKey(nazev);
     }
 
+    /**
+     *  Vrací odkaz na věc podle názvu
+     *
+     *@param    nazev název věci kterou hledáme
+     *@return   odkaz na celý objekt věc
+     */
     public Vec getVec(String nazev) {
         return veci.get(nazev);
     }
 
     /**
-     * Metoda equals pro porovnání dvou prostorů. Překrývá se metoda equals ze
-     * třídy Object. Dva prostory jsou shodné, pokud mají stejný název. Tato
-     * metoda je důležitá z hlediska správného fungování seznamu východů (Set).
+     *  Metoda equals pro porovnání dvou prostorů. Překrývá se metoda equals ze
+     *  třídy Object. Dva prostory jsou shodné, pokud mají stejný název. Tato
+     *  metoda je důležitá z hlediska správného fungování seznamu východů (Set).
      *
-     * Bližší popis metody equals je u třídy Object.
+     *  Bližší popis metody equals je u třídy Object.
      *
-     * @param o object, který se má porovnávat s aktuálním
-     * @return hodnotu true, pokud má zadaný prostor stejný název, jinak false
+     *@param    o object, který se má porovnávat s aktuálním
+     *@return   hodnotu true, pokud má zadaný prostor stejný název, jinak false
      */
     @Override
     public boolean equals(Object o) {
@@ -102,11 +127,13 @@ public class Prostor {
     }
 
     /**
-     * metoda hashCode vraci ciselny identifikator instance, ktery se pouziva
-     * pro optimalizaci ukladani v dynamickych datovych strukturach. Pri
-     * prekryti metody equals je potreba prekryt i metodu hashCode. Podrobny
-     * popis pravidel pro vytvareni metody hashCode je u metody hashCode ve
-     * tride Object
+     *  Metoda hashCode vrací číselný identifikátor instance, který se používá
+     *  pro optimalizaci ukládání v dynamických datových strukturách.
+     *  Při překrytí metody equals je potřeba překrýt i metodu hashCode.
+     *  Podrobný popis pravidel pro vytváření metody hashCode je u metody
+     *  hashCode ve třídě Object.
+     *
+     *@return   číselný identifikátor instance
      */
     @Override
     public int hashCode() {
@@ -117,21 +144,19 @@ public class Prostor {
     }
 
     /**
-     * Vrací název prostoru (byl zadán při vytváření prostoru jako parametr
-     * konstruktoru)
+     *  Vrací název prostoru (byl zadán při vytváření prostoru jako parametr
+     *  konstruktoru).
      *
-     * @return název prostoru
+     *@return   název prostoru
      */
     public String getNazev() {
         return nazev;       
     }
 
     /**
-     * Vrací "dlouhý" popis prostoru, který může vypadat následovně: Jsi v
-     * mistnosti/prostoru vstupni hala budovy VSE na Jiznim meste. vychody:
-     * chodba bufet ucebna
+     *  Vrací popis prostoru včetně aktuálních východů a věcí v prostoru.
      *
-     * @return Dlouhý popis prostoru
+     *@return   dlouhý popis prostoru
      */
     public String dlouhyPopis() {
         return "Jste v místnosti " + popis + ".\n"
@@ -140,10 +165,9 @@ public class Prostor {
     }
 
     /**
-     * Vrací textový řetězec, který popisuje sousední východy, například:
-     * "vychody: hala ".
+     *  Vrací textový řetězec, který popisuje sousední východy.
      *
-     * @return Popis východů - názvů sousedních prostorů
+     *@return   text k vypsání, popis východů (názvů sousedních prostorů)
      */
     private String popisVychodu() {
         String vracenyText = "východy:";
@@ -155,6 +179,11 @@ public class Prostor {
         return vracenyText;
     }
 
+    /**
+     *  Vrací text, který popisuje věci nacházející se v aktuálním prostoru.
+     *
+     *@return   text k vypsání, popis věcí v prostoru
+     */
     private String popisVeci() {
         String vracenyText = "věci:";
 
@@ -166,13 +195,13 @@ public class Prostor {
     }
 
     /**
-     * Vrací prostor, který sousedí s aktuálním prostorem a jehož název je zadán
-     * jako parametr. Pokud prostor s udaným jménem nesousedí s aktuálním
-     * prostorem, vrací se hodnota null.
+     *  Vrací prostor, který sousedí s aktuálním prostorem a jehož název je zadán
+     *  jako parametr. Pokud prostor s udaným jménem nesousedí s aktuálním
+     *  prostorem, vrací se hodnota null.
      *
-     * @param nazevSouseda Jméno sousedního prostoru (východu)
-     * @return Prostor, který se nachází za příslušným východem, nebo hodnota
-     * null, pokud prostor zadaného jména není sousedem.
+     *@param    nazevSouseda jméno sousedního prostoru (východu)
+     *@return   prostor, který se nachází za příslušným východem, nebo hodnota
+     *                   null, pokud prostor zadaného jména není sousedem
      */
     public Prostor vratSousedniProstor(String nazevSouseda) {
         List<Prostor> hledaneProstory =
@@ -187,6 +216,11 @@ public class Prostor {
         }
     }
 
+    /**
+     *  Vyhledá sousední místnosti, které jsou smrtelné pro hráče.
+     *
+     *@return   Set sousedních místností, které by uživatele zabili
+     */
     public Set<Prostor> vratSmrtelneProstory() {
         Set<Prostor> hledaneProstory = new HashSet<>();
 
@@ -200,22 +234,19 @@ public class Prostor {
     }
 
     /**
-     * Vrací kolekci obsahující prostory, se kterými tento prostor sousedí.
-     * Takto získaný seznam sousedních prostor nelze upravovat (přidávat,
-     * odebírat východy) protože z hlediska správného návrhu je to plně
-     * záležitostí třídy Prostor.
+     *  Zjištuje zda tento prostor je smrtelny.
      *
-     * @return Nemodifikovatelná kolekce prostorů (východů), se kterými tento
-     * prostor sousedí.
+     *@return   boolean zda je prostor smrtelny
      */
-    public Collection<Prostor> getVychody() {
-        return Collections.unmodifiableCollection(vychody);
-    }
-
     public boolean isSmrtelny() {
         return smrtelny;
     }
 
+    /**
+     *  Přepisuje proměnnou smrtelny na novou hodnotu.
+     *
+     *@param    smrtelny nová hodnota k použití
+     */
     public void setSmrtelny(boolean smrtelny) {
         this.smrtelny = smrtelny;
     }

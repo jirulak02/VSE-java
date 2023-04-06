@@ -4,9 +4,9 @@ import java.util.Scanner;
 import cz.vse.adventura.logika.IHra;
 
 /**
- *  Třída TextoveRozhrani
+ *  Třída TextoveRozhrani.
  * 
- *  Toto je uživatelského rozhraní aplikace Adventura
+ *  Toto je uživatelského rozhraní aplikace Adventura.
  *  Tato třída vytváří instanci třídy Hra, která představuje logiku aplikace.
  *  Čte vstup zadaný uživatelem a předává tento řetězec logice a vypisuje odpověď logiky na konzoli.
  *
@@ -19,7 +19,7 @@ public class TextoveRozhrani {
     private IHra hra;
 
     /**
-     *  Vytváří hru.
+     *  Konstruktor textového rozhraní.
      */
     public TextoveRozhrani(IHra hra) {
         this.hra = hra;
@@ -44,7 +44,7 @@ public class TextoveRozhrani {
     }
 
     /**
-     *  Metoda přečte příkaz z příkazového řádku
+     *  Metoda přečte příkaz z příkazového řádku.
      *
      *@return    Vrací přečtený příkaz jako instanci třídy String
      */

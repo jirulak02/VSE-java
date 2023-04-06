@@ -15,24 +15,26 @@ class PrikazKonec implements IPrikaz {
     private Hra hra;
 
     /**
-     *  Konstruktor třídy
+     *  Konstruktor příkazu konec.
      *  
-     *  @param hra odkaz na hru, která má být příkazem konec ukončena
+     *@param    hra odkaz na hru, která má být příkazem konec ukončena
      */    
     public PrikazKonec(Hra hra) {
         this.hra = hra;
     }
 
     /**
-     * V případě, že příkaz má jen jedno slovo "konec" hra končí(volá se metoda setKonecHry(true))
-     * jinak pokračuje např. při zadání "konec a".
-     * 
-     * @return zpráva, kterou vypíše hra hráči
+     *  V případě, že příkaz má jen jedno slovo "konec" hra končí(volá se metoda setKonecHry(true))
+     *  jinak pokračuje např. při zadání "konec a".
+     *
+     *@param    parametry obsahuje název příkazu konec
+     *@return   zpráva, kterou vypíše hra hráči
      */
     @Override
     public String provedPrikaz(String... parametry) {
+        // chceme délku parametru 0, název příkazu byl odstraněn
         if (parametry.length > 0) {
-            return "Ukončit co? Nechápu, proč jste zadal druhé slovo.";
+            return "Ukončit co? Nechápu, proč jste zadali druhé slovo.";
         } else {
             hra.setKonecHry(true);
             return "Hra ukončena příkazem konec!";
@@ -40,9 +42,9 @@ class PrikazKonec implements IPrikaz {
     }
 
     /**
-     *  Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
+     *  Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání).
      *  
-     *  @ return nazev prikazu
+     *@return   nazev prikazu
      */
     @Override
     public String getNazev() {

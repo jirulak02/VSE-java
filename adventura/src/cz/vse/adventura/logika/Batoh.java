@@ -19,27 +19,21 @@ public class Batoh {
     private float zbyleMisto;
     private Map<String, Vec> veci = new HashMap<>();
 
+    /**
+     *  Konstruktor batohu.
+     *
+     *@param    objem číslo určující maximální objem batohu
+     */
     public Batoh(float objem) {
         this.objem = objem;
         this.zbyleMisto = objem;
     }
 
-    public float getObjem() {
-        return objem;
-    }
-
-    public void setObjem(float objem) {
-        this.objem = objem;
-    }
-
-    public Map<String, Vec> getVeci() {
-        return veci;
-    }
-
-    public void setVeci(Map<String, Vec> veci) {
-        this.veci = veci;
-    }
-
+    /**
+     *  Zkontroluje pokud vec lze do batohu přidat a přidá ji.
+     *
+     *@param    vec vec, kterou chceme přidat do batohu
+     */
     public void addVec(Vec vec) {
         if (!vec.isPrenositelna()) {
             return;
@@ -55,22 +49,30 @@ public class Batoh {
         setZbyleMisto(zbyleMisto - objemVeci);
     }
 
+    /**
+     *  Odstraní věc z batohu podle názvu.
+     *
+     *@param    nazev název, podle kterého najdeme věc, kterou odstanit z batohu
+     */
     public void removeVec(String nazev) {
         veci.remove(nazev);
     }
 
+    /**
+     *  Vyhledá zda je věc již v batohu.
+     *
+     *@param    nazev název, podle kterého zjistíme, zda je věc již batohu obsažena
+     *@return   boolean podle toho, jestli funkce našla danou věc
+     */
     public boolean hasVec(String nazev) {
         return veci.containsKey(nazev);
     }
 
-    public Vec getVec(String nazev) {
-        return veci.get(nazev);
-    }
-
-    public float getZbyleMisto() {
-        return zbyleMisto;
-    }
-
+    /**
+     *  Přepíše zbyleMisto na novou hodnotu.
+     *
+     *@param    zbyleMisto nová hodnata, kterou chceme proměnné přidělit
+     */
     public void setZbyleMisto(float zbyleMisto) {
         this.zbyleMisto = zbyleMisto;
     }

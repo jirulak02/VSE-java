@@ -3,7 +3,7 @@
 package cz.vse.adventura.logika;
 
 /**
- *  Rozhraní které musí implementovat hra, je na ně navázáno uživatelské rozhraní
+ *  Rozhraní které musí implementovat hra, je na ně navázáno uživatelské rozhraní.
  *
  *  Toto rozhraní je součástí jednoduché textové hry.
  *
@@ -11,26 +11,24 @@ package cz.vse.adventura.logika;
  *@version    pro školní rok 2016/2017
  */
 public interface IHra {
-    //== VEŘEJNÉ KONSTANTY =====================================================
-    //== DEKLAROVANÉ METODY ====================================================
     /**
      *  Vrátí úvodní zprávu pro hráče.
      *  
-     *  @return  vrací se řetězec, který se má vypsat na obrazovku
+     *@return   vrací se řetězec, který se má vypsat na obrazovku
      */
     public String vratUvitani();
     
     /**
      *  Vrátí závěrečnou zprávu pro hráče.
      *  
-     *  @return  vrací se řetězec, který se má vypsat na obrazovku
+     *@return   vrací se řetězec, který se má vypsat na obrazovku
      */
     public String vratEpilog();
     
     /** 
      * Vrací informaci o tom, zda hra již skončila, je jedno zda výhrou, prohrou nebo příkazem konec.
      * 
-     * @return   vrací true, pokud hra skončila
+     *@return   vrací true, pokud hra skončila
      */
      public boolean konecHry();
 
@@ -39,8 +37,8 @@ public interface IHra {
      *  Pak otestuje zda příkaz je klíčovým slovem  např. jdi.
      *  Pokud ano spustí samotné provádění příkazu.
      *
-     *@param  radek  text, který zadal uživatel jako příkaz do hry.
-     *@return          vrací se řetězec, který se má vypsat na obrazovku
+     *@param    radek text, který zadal uživatel jako příkaz do hry
+     *@return   vrací se řetězec, který se má vypsat na obrazovku
      */
     public String zpracujPrikaz(String radek);
 
@@ -48,10 +46,7 @@ public interface IHra {
      *  Metoda vrátí odkaz na herní plán, je využita hlavně v testech,
      *  kde se jejím prostřednictvím získává aktualní místnost hry.
      *  
-     *  @return     odkaz na herní plán
+     *@return   odkaz na herní plán
      */
      public HerniPlan getHerniPlan();
-    
-    //== ZDĚDĚNÉ METODY ========================================================
-    //== INTERNÍ DATOVÉ TYPY ===================================================
 }

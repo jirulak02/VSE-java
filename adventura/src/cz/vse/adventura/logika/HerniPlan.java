@@ -17,9 +17,10 @@ public class HerniPlan {
     private Prostor aktualniProstor;
     private Batoh batoh;
     
-     /**
-     *  Konstruktor který vytváří jednotlivé prostory a propojuje je pomocí východů.
-     *  Jako výchozí aktuální prostor nastaví Temnou síň.
+    /**
+     *  Konstruktor herního plánu.
+     *
+     *@param    batoh batoh, do kterého lze přidávat předměty
      */
     public HerniPlan(Batoh batoh) {
         this.batoh = batoh;
@@ -95,16 +96,17 @@ public class HerniPlan {
     /**
      *  Metoda vrací odkaz na aktuální prostor, ve ktetém se hráč právě nachází.
      *
-     *@return     aktuální prostor
+     *@return   aktuální prostor
      */
     public Prostor getAktualniProstor() {
         return aktualniProstor;
     }
     
     /**
-     *  Metoda nastaví aktuální prostor, používá se nejčastěji při přechodu mezi prostory
+     *  Metoda nastaví aktuální prostor, používá se nejčastěji při přechodu
+     *  mezi prostory.
      *
-     *@param  prostor nový aktuální prostor
+     *@param    prostor nový aktuální prostor
      */
     public void setAktualniProstor(Prostor prostor) {
        aktualniProstor = prostor;
