@@ -111,4 +111,10 @@ public class HerniPlan {
     public void setAktualniProstor(Prostor prostor) {
        aktualniProstor = prostor;
     }
+
+    public void seberVec (String nazev) throws IllegalStateException {
+        Vec vec = this.getAktualniProstor().getVec(nazev);
+        this.batoh.addVec(vec);
+        this.getAktualniProstor().removeVec(nazev);
+    }
 }

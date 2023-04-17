@@ -1,0 +1,10 @@
+Vítejte!
+Nacházíte se v začarovaném labyrintu, který vás nenechá jen tak lehce uniknout.
+Napište 'nápověda', pokud si nevíte rady, jak hrát dál.
+
+Jste v místnosti temná síň.
+východy: zrcadlová_komnata
+věci:
+> konec
+Hra ukončena příkazem konec!
+Dík, že jste si zahráli. Ahoj.

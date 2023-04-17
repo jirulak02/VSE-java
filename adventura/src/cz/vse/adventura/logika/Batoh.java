@@ -36,12 +36,14 @@ public class Batoh {
      */
     public void addVec(Vec vec) {
         if (!vec.isPrenositelna()) {
+            System.out.println("Věc nelze vložit do batohu - je nepřenositelná.");
             return;
         }
 
         float objemVeci = vec.getObjem();
 
         if (objemVeci > zbyleMisto) {
+            System.out.println("Věc nelze vložit do batohu - nevejde se.");
             return;
         }
 
