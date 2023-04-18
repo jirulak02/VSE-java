@@ -33,9 +33,9 @@ public class PrikazSeber implements IPrikaz{
     public String provedPrikaz(String... parametry) {
         // chceme délku parametru 1, název příkazu byl odstraněn
         if (parametry.length == 0) {
-            return "Co mám sebrat? Musíte zadat jméno věci.";
+            return "Error: Co mám sebrat? Musíte zadat jméno věci.";
         } else if (parametry.length > 1) {
-            return "Nelze sebrat více věcí zároveň, zadejte pouze jednu.";
+            return "Error: Nelze sebrat více věcí zároveň, zadejte pouze jednu.";
         }
 
         String nazevVeci = parametry[0];
@@ -46,10 +46,10 @@ public class PrikazSeber implements IPrikaz{
 
         try {
             plan.seberVec(nazevVeci);
-        } catch (IllegalStateException e) {
-            return e.getMessage();
         } catch(NullPointerException e) {
-            return e.getMessage();
+            return "Error: Věc '" + nazevVeci + "' v této místnosti není.";
+        } catch (RuntimeException e) {
+            return "Error: " + e.getMessage();
         }
 
         return "Věc '" + nazevVeci + "' je nyní v batohu\n" + plan.vypisBatoh();

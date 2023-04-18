@@ -15,15 +15,6 @@ class PrikazJdi implements IPrikaz {
     private HerniPlan plan;
     private Hra hra;
     private Batoh batoh;
-    
-    /**
-     *  Konstruktor příkazu jdi.
-     *
-     *@param    plan herní plán, ve kterém se bude ve hře "chodit"
-     */
-    public PrikazJdi(HerniPlan plan) {
-        this.plan = plan;
-    }
 
     /**
      *  Konstruktor příkazu jdi.
@@ -42,17 +33,16 @@ class PrikazJdi implements IPrikaz {
      *  (východ) není, vypíše se chybové hlášení.
      *  Zařizuje i easter egg, zabíjení ve smrtelných místnostech a úspěšné ukončení hry.
      *
-     *@param    parametry parametr obsahuje jméno prostoru (východu),
-     *                    do kterého se má jít
+     *@param    parametry parametr obsahuje jméno prostoru (východu), do kterého se má jít
      *@return   zpráva, kterou vypíše hra hráči
      */ 
     @Override
     public String provedPrikaz(String... parametry) {
         // chceme délku parametru 1, název příkazu byl odstraněn
         if (parametry.length == 0) {
-            return "Kam mám jít? Musíte zadat jméno východu.";
+            return "Error: Kam mám jít? Musíte zadat jméno východu.";
         } else if (parametry.length > 1) {
-            return "Nelze jít do více místností zároveň, zadejte pouze jednu.";
+            return "Error: Nelze jít do více místností zároveň, zadejte pouze jednu.";
         }
 
         String smer = parametry[0];
@@ -61,7 +51,7 @@ class PrikazJdi implements IPrikaz {
         Prostor sousedniProstor = plan.getAktualniProstor().vratSousedniProstor(smer);
 
         if (sousedniProstor == null) {
-            return "Tam se odsud jít nedá!";
+            return "Error: Tam se odsud jít nedá!";
         } else if (sousedniProstor.isSmrtelny() && batoh.hasVec("špunt")) {
             String[] easterEgg = {
                     "Dobrý nápad, černou díru jste zašpuntovali a našli jste můj easter egg.",
@@ -85,26 +75,31 @@ class PrikazJdi implements IPrikaz {
                 try {
                     Thread.sleep(500);
                 } catch (Exception e) {
-                    System.out.println("Error message: " + e.getMessage());
+                    System.out.println("Error: " + e.getMessage());
                 }
             }
 
             plan.setAktualniProstor(sousedniProstor);
+
             return sousedniProstor.dlouhyPopis();
         } else if (sousedniProstor.isSmrtelny()) {
             hra.setKonecHry(true);
-            System.out.println("V místnosti vás vtáhla a zabila černá díra. Hra ukončena!");
-            return "Zkuste to znovu. Případně pokud máte dost, tak...";
+
+            return "V místnosti vás vtáhla a zabila černá díra. Hra ukončena!\n" +
+                    "Zkuste to znovu. Případně pokud máte dost, tak...";
         } else if (sousedniProstor.getNazev().equals("brána_labyrintu")) {
             Prostor mistnost = plan.getAktualniProstor();
+
             if (mistnost.isOdemceno()) {
                 hra.setKonecHry(true);
+
                 return "Úspěšně se vám podařilo uniknout z labyrintu a hru jste tak dohráli.";
-            } else {
-                return "Bránu musíte nejdřív odemknout.";
             }
+
+            return "Error: Bránu musíte nejdřív odemknout.";
         } else {
             plan.setAktualniProstor(sousedniProstor);
+
             return sousedniProstor.dlouhyPopis();
         }
     }

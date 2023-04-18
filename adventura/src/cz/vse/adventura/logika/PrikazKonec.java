@@ -34,9 +34,10 @@ class PrikazKonec implements IPrikaz {
     public String provedPrikaz(String... parametry) {
         // chceme délku parametru 0, název příkazu byl odstraněn
         if (parametry.length > 0) {
-            return "Ukončit co? Nechápu, proč jste zadali druhé slovo.";
+            return "Error: Ukončit co? Nechápu, proč jste zadali druhé slovo.";
         } else {
             hra.setKonecHry(true);
+
             return "Hra ukončena příkazem konec!";
         }
     }

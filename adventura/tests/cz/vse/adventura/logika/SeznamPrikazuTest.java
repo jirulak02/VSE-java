@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SeznamPrikazuTest
 {
     private Hra hra;
+    private Batoh batoh = new Batoh(4);
     private PrikazKonec prKonec;
     private PrikazJdi prJdi;
     
@@ -22,7 +23,7 @@ public class SeznamPrikazuTest
     public void setUp() {
         hra = new Hra();
         prKonec = new PrikazKonec(hra);
-        prJdi = new PrikazJdi(hra.getHerniPlan());
+        prJdi = new PrikazJdi(hra.getHerniPlan(), hra, batoh);
     }
 
     @Test

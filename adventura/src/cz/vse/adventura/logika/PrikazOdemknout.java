@@ -36,21 +36,22 @@ public class PrikazOdemknout implements IPrikaz {
     public String provedPrikaz(String... parametry) {
         // chceme délku parametru 0, název příkazu byl odstraněn
         if (parametry.length > 0) {
-            return "Nemusíte zadávat co chcete odemknout, stačí příkaz 'odemknout'";
+            return "Error: Nemusíte zadávat co chcete odemknout, stačí příkaz 'odemknout'";
         }
 
         if (!batoh.hasVec("klíč")) {
-            return "K odemčení potřebujete klíč.";
+            return "Error: K odemčení potřebujete klíč.";
         }
 
         Prostor mistnost = plan.getAktualniProstor();
 
         if (mistnost.getNazev().equals("příšerný_tunel")) {
             mistnost.setOdemceno(true);
+
             return "Brána labyrintu je odemknuta, můžete uniknout.";
         }
 
-        return "K odemčení brány před ní musíte stát.";
+        return "Error: K odemčení brány před ní musíte stát.";
     }
 
     /**

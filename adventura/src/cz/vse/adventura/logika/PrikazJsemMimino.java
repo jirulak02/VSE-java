@@ -36,7 +36,7 @@ public class PrikazJsemMimino implements IPrikaz {
     public String provedPrikaz(String... parametry) {
         // chceme délku parametru 0, název příkazu byl odstraněn
         if (parametry.length > 0) {
-            return "Nezajímá mě jaké jste mimino, použijte jen jedno slovo.";
+            return "Error: Nezajímá mě jaké jste mimino, použijte jen jedno slovo.";
         }
 
         Set<Prostor> hledaneProstory = plan.getAktualniProstor().vratSmrtelneProstory();

@@ -33,9 +33,9 @@ public class PrikazVypis implements IPrikaz {
     public String provedPrikaz(String... parametry) {
         // chceme délku parametru 1, název příkazu byl odstraněn
         if (parametry.length == 0) {
-            return "Co mám vypsat? Vyberte buď 'batoh' nebo 'prostor'.";
+            return "Error: Co mám vypsat? Vyberte buď 'batoh' nebo 'prostor'.";
         } else if (parametry.length > 1) {
-            return "Nelze vypsat vše zároveň, zadejte pouze jedno.";
+            return "Error: Nelze vypsat vše zároveň, zadejte pouze jedno.";
         }
 
         String parametr = parametry[0];
@@ -47,7 +47,7 @@ public class PrikazVypis implements IPrikaz {
             return prostor.popisVychodu() + "\n" + prostor.popisVeci();
         }
 
-        return "'" + parametr + "'" + " nelze vypsat.";
+        return "Error: '" + parametr + "'" + " nelze vypsat.";
     }
 
     /**

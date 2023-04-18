@@ -141,6 +141,7 @@ public class Prostor {
         int vysledek = 3;
         int hashNazvu = java.util.Objects.hashCode(this.nazev);
         vysledek = 37 * vysledek + hashNazvu;
+
         return vysledek;
     }
 

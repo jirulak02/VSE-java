@@ -46,20 +46,17 @@ public class Batoh {
      */
     public void addVec(Vec vec) {
         if (vec.getNazev().equals("thorovo_kladivo")) {
-            System.out.println("Bohužel nejste vyvolení, takže Thorovo kladivo se vám nepodařilo zvednout.");
-            return;
+            throw new RuntimeException("Bohužel nejste vyvolení, takže Thorovo kladivo se vám nepodařilo zvednout.");
         }
 
         if (!vec.isPrenositelna()) {
-            System.out.println("Věc nelze vložit do batohu - je nepřenositelná.");
-            return;
+            throw new RuntimeException("Věc je nepřenositelná.");
         }
 
         int objemVeci = vec.getObjem();
 
         if (objemVeci > zbyleMisto) {
-            System.out.println("Věc nelze vložit do batohu - nevejde se.");
-            return;
+            throw new RuntimeException("Věc se do batohu nevejde.");
         }
 
         veci.put(vec.getNazev(), vec);

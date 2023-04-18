@@ -1,10 +1,20 @@
+seber štít
+seber koště
 jdi zrcadlová_komnata
 seber mikrofon
-seber prsten
-seber stul
-vypis batoh
-vypis prostor
+polož koště
+seber dfsnntsng
+seber stůl
+seber mikrofon
+vypiš batoh
+vypiš prostor
+polož štít
+seber koště
+vypiš batoh
+vypiš prostor
 konec
+^^^^^^ sbírání a pokládání ^^^^^^
+
 
 jdi zrcadlová_komnata
 jdi tichá_místnost

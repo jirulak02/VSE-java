@@ -35,7 +35,7 @@ class PrikazNapoveda implements IPrikaz {
     public String provedPrikaz(String... parametry) {
         // chceme délku parametru 0, název příkazu byl odstraněn
         if (parametry.length > 0) {
-            return "Jaká nápověda? Nechápu, proč jste zadali druhé slovo.";
+            return "Error: Jaká nápověda? Nechápu, proč jste zadali druhé slovo.";
         }
 
         return "Tvým úkolem je najít klíč, odemknout si bránu a utéct z labyrintu.\n"

@@ -46,7 +46,7 @@ public class PrikazZazpivat implements IPrikaz {
             clip.start();
             Thread.sleep(19000);
         } catch (Exception e) {
-            System.out.println("Error message: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -62,11 +62,11 @@ public class PrikazZazpivat implements IPrikaz {
     public String provedPrikaz(String... parametry) {
         // chceme délku parametru 0, název příkazu byl odstraněn
         if (parametry.length > 0) {
-            return "Písnička je již vybraná, takže stačí pouze příkaz zazpívat";
+            return "Error: Písnička je již vybraná, takže stačí pouze příkaz zazpívat";
         }
 
         if (!batoh.hasVec("mikrofon")) {
-            return "Ke zpěvu potřebujete mikrofon.";
+            return "Error: Ke zpěvu potřebujete mikrofon.";
         }
 
         String[] pisnicka = {
@@ -92,7 +92,7 @@ public class PrikazZazpivat implements IPrikaz {
             try {
                 Thread.sleep(3400);
             } catch (Exception e) {
-                System.out.println("Error message: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage());
             }
         }
 

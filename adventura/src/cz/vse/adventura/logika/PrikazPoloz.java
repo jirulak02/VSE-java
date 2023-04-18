@@ -33,19 +33,19 @@ public class PrikazPoloz implements IPrikaz{
     public String provedPrikaz(String... parametry) {
         // chceme délku parametru 1, název příkazu byl odstraněn
         if (parametry.length == 0) {
-            return "Co mám položit? Musíte zadat jméno věci.";
+            return "Error: Co mám položit? Musíte zadat jméno věci.";
         } else if (parametry.length > 1) {
-            return "Nelze položit více věcí zároveň, zadejte pouze jednu.";
+            return "Error: Nelze položit více věcí zároveň, zadejte pouze jednu.";
         }
 
         String nazevVeci = parametry[0];
 
         try {
             plan.polozVec(nazevVeci);
-        } catch (IllegalStateException e) {
-            return e.getMessage();
         } catch(NullPointerException e) {
-            return e.getMessage();
+            return "Error: Věc '" + nazevVeci + "' není v batohu.";
+        } catch (RuntimeException e) {
+            return "Error: " + e.getMessage();
         }
 
         return "Věc '" + nazevVeci + "' byla vyndána z batohu\n" + plan.vypisBatoh();
