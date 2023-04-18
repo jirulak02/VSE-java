@@ -1,1 +1,35 @@
+jdi zrcadlová_komnata
+seber mikrofon
+seber prsten
+seber stul
+vypis batoh
+vypis prostor
 konec
+
+jdi zrcadlová_komnata
+jdi tichá_místnost
+^^^^^^ černá díra ^^^^^^
+
+
+jdi zrcadlová_komnata
+jdi rozcestí_záhad
+jdi tajemná_ložnice
+seber špunt
+jdi rozcestí_záhad
+jdi skrytá_kóje
+konec
+^^^^^^ easter egg ^^^^^^
+
+
+jdi zrcadlová_komnata
+jdi prázdný_pokoj
+jdi zelená_hala
+jdi zpětná_místnost
+jdi ztracený_kout
+seber klíč
+jdi zpětná_místnost
+seber bota
+jdi příšerný_tunel
+odemknout
+jdi brána_labyrintu
+^^^^^^ rychle do cíle ^^^^^^

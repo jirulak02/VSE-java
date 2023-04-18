@@ -16,6 +16,7 @@ package cz.vse.adventura.logika;
 public class HerniPlan {
     private Prostor aktualniProstor;
     private Batoh batoh;
+    private Prostor teleport;
     
     /**
      *  Konstruktor herního plánu.
@@ -29,7 +30,8 @@ public class HerniPlan {
 
     /**
      *  Vytváří jednotlivé prostory a propojuje je pomocí východů.
-     *  Jako výchozí aktuální prostor nastaví Temnou síň.
+     *  Vytváří věci a přiřazuje je do prostorů.
+     *  Jako výchozí aktuální prostor nastaví temnou síň.
      */
     private void zalozProstoryHry() {
         // vytvářejí se jednotlivé prostory
@@ -76,21 +78,57 @@ public class HerniPlan {
         skrytaKoje.setVychod(rozcestiZahad);
         ztracenyKout.setVychod(zpetnaMistnost);
 
-        // vytvářejí se jednotlivé věci
+        // určuje místo k teleportaci
+        this.setTeleport(tajemnaLoznice);
+
+        // vytvářejí se speciální věci
         Vec mikrofon = new Vec("mikrofon", true, 1);
         Vec spunt = new Vec("špunt", true, 1);
         Vec bota = new Vec("bota", true, 1);
         Vec klic = new Vec("klíč", true, 1);
+
+        // vytvářejí se ostatní věci
+        Vec prsten = new Vec("prsten", true, 1);
+        Vec koste = new Vec("koště", true, 2);
+        Vec zidle = new Vec("židle", false, 1);
+        Vec thorKladivo = new Vec("thorovo_kladivo", false, 1);
+        Vec pivo = new Vec("pivo", true, 1);
+        Vec gps = new Vec("gps", true, 1);
+        Vec retez = new Vec("řetěz", false, 1);
+        Vec kybl = new Vec("kýbl", true, 2);
+        Vec lucerna = new Vec("lucerna", true, 1);
+        Vec mec = new Vec("meč", true, 2);
+        Vec mapa = new Vec("mapa", true, 1);
+        Vec truhlice = new Vec("truhlice", false, 1);
+        Vec nuz = new Vec("nůž", true, 1);
+        Vec kriz = new Vec("kříž", true, 1);
+        Vec stit = new Vec("štít", true, 2);
+        Vec stul = new Vec("stůl", false, 1);
 
         // přiřazují se věci do prostorů
         zrcadlovaKomnata.addVec(mikrofon);
         tajemnaLoznice.addVec(spunt);
         zpetnaMistnost.addVec(bota);
         ztracenyKout.addVec(klic);
+        temnaSin.addVec(stit);
+        temnaSin.addVec(koste);
+        zrcadlovaKomnata.addVec(stul);
+        zrcadlovaKomnata.addVec(prsten);
+        prazdnyPokoj.addVec(kriz);
+        tajemnaLoznice.addVec(zidle);
+        rozcestiZahad.addVec(thorKladivo);
+        rozcestiZahad.addVec(pivo);
+        rozcestiZahad.addVec(gps);
+        zelenaHala.addVec(retez);
+        zelenaHala.addVec(kybl);
+        zpetnaMistnost.addVec(lucerna);
+        zpetnaMistnost.addVec(mec);
+        ztracenyKout.addVec(mapa);
+        prisernyTunel.addVec(truhlice);
+        prisernyTunel.addVec(nuz);
 
-        batoh.addVec(spunt);
-        batoh.addVec(mikrofon);
-        aktualniProstor = temnaSin;  // hra začíná v Temné síni
+        // hra začíná v temné síni
+        aktualniProstor = temnaSin;
     }
 
     /**
@@ -112,9 +150,60 @@ public class HerniPlan {
        aktualniProstor = prostor;
     }
 
-    public void seberVec (String nazev) throws IllegalStateException {
+    /**
+     *  Přidává věc do batohu a odebírá ji z prostoru.
+     *
+     *@param    nazev název veci kterou chceme sebrat
+     */
+    public void seberVec (String nazev) {
         Vec vec = this.getAktualniProstor().getVec(nazev);
+
         this.batoh.addVec(vec);
         this.getAktualniProstor().removeVec(nazev);
+    }
+
+    /**
+     *  Přidává věc do prostoru a odebírá ji z batohu.
+     *
+     *@param    nazev název veci kterou chceme položit
+     */
+    public void polozVec (String nazev) {
+        Vec vec = batoh.getVec(nazev);
+
+        this.getAktualniProstor().addVec(vec);
+        this.batoh.removeVec(vec);
+    }
+
+    /**
+     *  Vypisuje všechni věci, které jsou aktuálně v batohu.
+     *
+     *@return   seznam věcí v batohu
+     */
+    public String vypisBatoh () {
+        return batoh.popisBatohu();
+    }
+
+    /**
+     *  Teleportuje hráče do místnosti určené v neznámé 'teleport'.
+     *
+     *@return    oznámení teleportace uživateli
+     */
+    public String teleportovat() {
+        this.setAktualniProstor(teleport);
+
+        Prostor mistnost = this.getAktualniProstor();
+
+        return "Začarovaná bota vás teleportovala do tajemné ložnice.\n" +
+                mistnost.popisVychodu() + "\n" +
+                mistnost.popisVeci();
+    }
+
+    /**
+     *  Nastavuje nový teleportační prostor.
+     *
+     *@param    teleport Prostor, který chceme nastavit jako ten, kam se uživatel teleportuje
+     */
+    public void setTeleport(Prostor teleport) {
+        this.teleport = teleport;
     }
 }

@@ -20,6 +20,7 @@ public class Prostor {
     private Set<Prostor> vychody = new HashSet<>();
     private Map<String, Vec> veci = new HashMap<>();
     private boolean smrtelny = false;
+    private boolean odemceno = false;
 
     /**
      *  Konstruktor prostoru.
@@ -169,7 +170,7 @@ public class Prostor {
      *
      *@return   text k vypsání, popis východů (názvů sousedních prostorů)
      */
-    private String popisVychodu() {
+    public String popisVychodu() {
         String vracenyText = "východy:";
 
         for (Prostor sousedni : vychody) {
@@ -184,7 +185,7 @@ public class Prostor {
      *
      *@return   text k vypsání, popis věcí v prostoru
      */
-    private String popisVeci() {
+    public String popisVeci() {
         String vracenyText = "věci:";
 
         for (String nazevVeci : veci.keySet()) {
@@ -249,5 +250,23 @@ public class Prostor {
      */
     public void setSmrtelny(boolean smrtelny) {
         this.smrtelny = smrtelny;
+    }
+
+    /**
+     *  Zjištuje zda je brána odemčena.
+     *
+     *@return   boolean zda je brána odemčena
+     */
+    public boolean isOdemceno() {
+        return odemceno;
+    }
+
+    /**
+     *  Přepisuje proměnnou odemceno na novou hodnotu.
+     *
+     *@param    odemceno nová hodnota k použití
+     */
+    public void setOdemceno(boolean odemceno) {
+        this.odemceno = odemceno;
     }
 }

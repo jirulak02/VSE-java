@@ -15,8 +15,8 @@ import java.util.Map;
  *@version    Duben 2023
  */
 public class Batoh {
-    private float objem;
-    private float zbyleMisto;
+    private int objem;
+    private int zbyleMisto;
     private Map<String, Vec> veci = new HashMap<>();
 
     /**
@@ -24,23 +24,38 @@ public class Batoh {
      *
      *@param    objem číslo určující maximální objem batohu
      */
-    public Batoh(float objem) {
+    public Batoh(int objem) {
         this.objem = objem;
         this.zbyleMisto = objem;
     }
 
     /**
+     *  Vrací odkaz na věc podle názvu
+     *
+     *@param    nazev název věci kterou hledáme
+     *@return   odkaz na celý objekt věc
+     */
+    public Vec getVec(String nazev) {
+        return veci.get(nazev);
+    }
+
+    /**
      *  Zkontroluje pokud vec lze do batohu přidat a přidá ji.
      *
-     *@param    vec vec, kterou chceme přidat do batohu
+     *@param    vec věc, kterou chceme přidat do batohu
      */
     public void addVec(Vec vec) {
+        if (vec.getNazev().equals("thorovo_kladivo")) {
+            System.out.println("Bohužel nejste vyvolení, takže Thorovo kladivo se vám nepodařilo zvednout.");
+            return;
+        }
+
         if (!vec.isPrenositelna()) {
             System.out.println("Věc nelze vložit do batohu - je nepřenositelná.");
             return;
         }
 
-        float objemVeci = vec.getObjem();
+        int objemVeci = vec.getObjem();
 
         if (objemVeci > zbyleMisto) {
             System.out.println("Věc nelze vložit do batohu - nevejde se.");
@@ -54,10 +69,14 @@ public class Batoh {
     /**
      *  Odstraní věc z batohu podle názvu.
      *
-     *@param    nazev název, podle kterého najdeme věc, kterou odstanit z batohu
+     *@param    vec věc, kterou chceme odstanit z batohu
      */
-    public void removeVec(String nazev) {
-        veci.remove(nazev);
+    public void removeVec(Vec vec) {
+        veci.remove(vec.getNazev());
+
+        int objemVeci = vec.getObjem();
+
+        setZbyleMisto(zbyleMisto + objemVeci);
     }
 
     /**
@@ -75,7 +94,23 @@ public class Batoh {
      *
      *@param    zbyleMisto nová hodnata, kterou chceme proměnné přidělit
      */
-    public void setZbyleMisto(float zbyleMisto) {
+    public void setZbyleMisto(int zbyleMisto) {
         this.zbyleMisto = zbyleMisto;
+    }
+
+    /**
+     *  Vrací výpis věcí v batohu.
+     *
+     *@return   String popis obsahu batohu
+     */
+    public String popisBatohu() {
+        String vracenyText = "Obsah batohu:";
+
+        for (String nazevVeci : veci.keySet()) {
+            vracenyText += " " + nazevVeci;
+        }
+
+        return vracenyText + "\n" +
+                "Volno v batohu: " + zbyleMisto;
     }
 }

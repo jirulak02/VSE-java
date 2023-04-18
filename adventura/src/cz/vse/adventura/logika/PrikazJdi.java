@@ -40,7 +40,7 @@ class PrikazJdi implements IPrikaz {
      *  Provádí příkaz "jdi". Zkouší se vyjít do zadaného prostoru. Pokud prostor
      *  existuje, vstoupí se do nového prostoru. Pokud zadaný sousední prostor
      *  (východ) není, vypíše se chybové hlášení.
-     *  Zařizuje i easter egg a zabíjení ve smrtelných místnostech.
+     *  Zařizuje i easter egg, zabíjení ve smrtelných místnostech a úspěšné ukončení hry.
      *
      *@param    parametry parametr obsahuje jméno prostoru (východu),
      *                    do kterého se má jít
@@ -95,6 +95,14 @@ class PrikazJdi implements IPrikaz {
             hra.setKonecHry(true);
             System.out.println("V místnosti vás vtáhla a zabila černá díra. Hra ukončena!");
             return "Zkuste to znovu. Případně pokud máte dost, tak...";
+        } else if (sousedniProstor.getNazev().equals("brána_labyrintu")) {
+            Prostor mistnost = plan.getAktualniProstor();
+            if (mistnost.isOdemceno()) {
+                hra.setKonecHry(true);
+                return "Úspěšně se vám podařilo uniknout z labyrintu a hru jste tak dohráli.";
+            } else {
+                return "Bránu musíte nejdřív odemknout.";
+            }
         } else {
             plan.setAktualniProstor(sousedniProstor);
             return sousedniProstor.dlouhyPopis();

@@ -30,7 +30,7 @@ public class PrikazZazpivat implements IPrikaz {
     /**
      *  Spouští písničku ze složky a uspí provádění příkazů na 19 sekund.
      */
-    public void zazpivej() {
+    private void zazpivej() {
         try {
             System.out.println("Zapněte si zvuk.\n");
 

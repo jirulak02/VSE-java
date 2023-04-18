@@ -14,7 +14,7 @@ package cz.vse.adventura.logika;
 public class Vec {
     private String nazev;
     private boolean prenositelna;
-    private float objem;
+    private int objem;
 
     /**
      *  Konstruktor věci.
@@ -23,7 +23,7 @@ public class Vec {
      *@param    prenositelna určuje zda se věc dá zvednout (dát do batohu)
      *@param    objem velikost věci
      */
-    public Vec(String nazev, boolean prenositelna, float objem) {
+    public Vec(String nazev, boolean prenositelna, int objem) {
         this.nazev = nazev;
         this.prenositelna = prenositelna;
         this.objem = objem;
@@ -52,7 +52,7 @@ public class Vec {
      *
      *@return   číslo, jak je věc veliká
      */
-    public float getObjem() {
+    public int getObjem() {
         return objem;
     }
 }

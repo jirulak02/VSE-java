@@ -1,58 +1,54 @@
 package cz.vse.adventura.logika;
 
 /**
- *  Třída PrikazSeber implementuje pro hru příkaz seber.
+ *  Třída PrikazPoloz implementuje pro hru příkaz polož.
  *
- *  Příkaz sbírá věc z prostoru a dává ji do batohu.
+ *  Příkaz vyndavá věc z batohu a pokládá ji na zem do prostoru.
  *
  *  Tato třída je součástí jednoduché textové hry.
  *
  *@author     Jiří Šimeček
  *@version    Duben 2023
  */
-public class PrikazSeber implements IPrikaz{
-    private static final String NAZEV = "seber";
+public class PrikazPoloz implements IPrikaz{
+    private static final String NAZEV = "polož";
     private HerniPlan plan;
 
     /**
-     *  Konstruktor příkazu seber.
+     *  Konstruktor příkazu polož.
      *
      *@param    plan herní plán, ve kterém se bude ve hře "chodit"
      */
-    public PrikazSeber(HerniPlan plan) {
+    public PrikazPoloz(HerniPlan plan) {
         this.plan = plan;
     }
 
     /**
-     *  Sbírá věc z prostoru a dává ji do batohu.
+     *  Vyndavá věc z batohu a pokládá ji na zem do prostoru.
      *
-     *@param    parametry věc kterou chceme sebrat
+     *@param    parametry věc kterou chceme položit
      *@return   zpráva, kterou vypíše hra hráči
      */
     @Override
     public String provedPrikaz(String... parametry) {
         // chceme délku parametru 1, název příkazu byl odstraněn
         if (parametry.length == 0) {
-            return "Co mám sebrat? Musíte zadat jméno věci.";
+            return "Co mám položit? Musíte zadat jméno věci.";
         } else if (parametry.length > 1) {
-            return "Nelze sebrat více věcí zároveň, zadejte pouze jednu.";
+            return "Nelze položit více věcí zároveň, zadejte pouze jednu.";
         }
 
         String nazevVeci = parametry[0];
 
-        if (nazevVeci.equals("bota")) {
-            return plan.teleportovat();
-        }
-
         try {
-            plan.seberVec(nazevVeci);
+            plan.polozVec(nazevVeci);
         } catch (IllegalStateException e) {
             return e.getMessage();
         } catch(NullPointerException e) {
             return e.getMessage();
         }
 
-        return "Věc '" + nazevVeci + "' je nyní v batohu\n" + plan.vypisBatoh();
+        return "Věc '" + nazevVeci + "' byla vyndána z batohu\n" + plan.vypisBatoh();
     }
 
     /**
