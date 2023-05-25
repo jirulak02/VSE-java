@@ -1,3 +1,16 @@
+jdi zrcadlová_komnata
+jdi prázdný_pokoj
+jdi zelená_hala
+jdi zpětná_místnost
+jdi ztracený_kout
+seber klíč
+jdi zpětná_místnost
+seber bota
+jdi příšerný_tunel
+odemknout
+jdi brána_labyrintu
+^^^^^^ rychle do cíle ^^^^^^
+
 seber štít
 seber koště
 jdi zrcadlová_komnata
@@ -29,17 +42,3 @@ jdi rozcestí_záhad
 jdi skrytá_kóje
 konec
 ^^^^^^ easter egg ^^^^^^
-
-
-jdi zrcadlová_komnata
-jdi prázdný_pokoj
-jdi zelená_hala
-jdi zpětná_místnost
-jdi ztracený_kout
-seber klíč
-jdi zpětná_místnost
-seber bota
-jdi příšerný_tunel
-odemknout
-jdi brána_labyrintu
-^^^^^^ rychle do cíle ^^^^^^

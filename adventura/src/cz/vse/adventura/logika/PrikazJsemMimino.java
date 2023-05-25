@@ -42,8 +42,10 @@ public class PrikazJsemMimino implements IPrikaz {
         Set<Prostor> hledaneProstory = plan.getAktualniProstor().vratSmrtelneProstory();
         String textKVypsani = "Smrtelné východy:";
 
+        textKVypsani += " \u001B[31m";
+
         for (Prostor vychod : hledaneProstory) {
-            textKVypsani += " \u001B[31m" + vychod.getNazev();
+            textKVypsani += vychod.getNazev();
         }
 
         textKVypsani += "\u001B[0m";
