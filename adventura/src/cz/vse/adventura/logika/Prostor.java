@@ -1,5 +1,7 @@
 package cz.vse.adventura.logika;
 
+import lombok.Data;
+
 import java.util.*;
 
 /**
@@ -14,6 +16,7 @@ import java.util.*;
  *@author       Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova, Jiří Šimeček
  *@version      Duben 2023
  */
+@Data
 public class Prostor {
     private String nazev;
     private String popis;
@@ -108,23 +111,17 @@ public class Prostor {
      */
     @Override
     public boolean equals(Object o) {
-        // porovnáváme zda se nejedná o dva odkazy na stejnou instanci
-        if (this == o) {
-            return true;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        // porovnáváme jakého typu je parametr 
-        if (!(o instanceof Prostor)) {
-            return false;    // pokud parametr není typu Prostor, vrátíme false
-        }
+        Prostor prostor = (Prostor) o;
 
-        // přetypujeme parametr na typ Prostor 
-        Prostor druhy = (Prostor) o;
-
-        // metoda equals třídy java.util.Objects porovná hodnoty obou názvů.
-        // Vrátí true pro stejné názvy a i v případě, že jsou oba názvy null,
-        // jinak vrátí false.
-        return (java.util.Objects.equals(this.nazev, druhy.nazev));
+        if (smrtelny != prostor.smrtelny) return false;
+        if (odemceno != prostor.odemceno) return false;
+        if (!Objects.equals(nazev, prostor.nazev)) return false;
+        if (!Objects.equals(popis, prostor.popis)) return false;
+        if (!Objects.equals(vychody, prostor.vychody)) return false;
+        return Objects.equals(veci, prostor.veci);
     }
 
     /**
